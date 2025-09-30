@@ -77,8 +77,10 @@ const NewsListDialogue = ({ page, size }) => {
         setVideoLink(dialogueData.videoUrl);
       }
 
-      setName("");
-      setDescription("");
+      // Use existing data instead of empty strings
+      setName(dialogueData?.name || "");
+      setDescription(dialogueData?.description || "");
+      setCoin(dialogueData?.coin || 0);
     }
   }, [dialogueData]);
 
@@ -290,6 +292,7 @@ const NewsListDialogue = ({ page, size }) => {
         };
 
         const res = await dispatch(editVideoList(data));
+
         if (res?.payload?.status) {
           setToast("success", res?.payload?.message);
           handleCloseAds();
@@ -411,9 +414,7 @@ const NewsListDialogue = ({ page, size }) => {
                   <Input
                     type="text"
                     label="Name *"
-                    value={
-                      dialogueData?.name || dialogueData?.movieSeries?.name
-                    }
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                     style={{ border: "1px solid #e9ecef", borderRadius: "8px" }}
                   />
@@ -424,10 +425,7 @@ const NewsListDialogue = ({ page, size }) => {
                   <Input
                     type="text"
                     label="Description *"
-                    value={
-                      dialogueData?.description ||
-                      dialogueData?.movieSeries?.description
-                    }
+                    value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     style={{ border: "1px solid #e9ecef", borderRadius: "8px" }}
                   />
@@ -440,10 +438,7 @@ const NewsListDialogue = ({ page, size }) => {
                   <Input
                     type="number"
                     label="Coin (optional)"
-                    value={
-                      dialogueData?.coin ||
-                      dialogueData?.movieSeries?.coin
-                    }
+                    value={coin}
                     onChange={(e) => setCoin(Number(e.target.value))}
                     style={{ border: "1px solid #e9ecef", borderRadius: "8px" }}
                   />

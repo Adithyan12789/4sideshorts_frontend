@@ -292,18 +292,6 @@ const ViewShortVideo = () => {
           );
         },
       },
-
-      {
-        Header: "News Number",
-        body: "news number",
-        Cell: ({ row, index }) => (
-          <div className="userTableImage">
-            <span>
-              {row?.newsNumber === 0 ? "Trailer" : row?.newsNumber}
-            </span>
-          </div>
-        ),
-      },
       {
         Header: "Locked Status",
         body: "news number",
